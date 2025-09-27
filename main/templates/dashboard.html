@@ -1,0 +1,26 @@
+{% extends "home.html" %}
+{% block title %} Dashboard {% endblock %}
+{% block nav_title %} Dashboard Page {% endblock %}
+{% block content %}
+
+{% if messages %}
+    <div class="container mt-3 bg-danger text-center text-white " style=" width: 60%; z-index: 1100;">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}"id="alert-message">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+    <div class="container mt-5 pt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome to the Dashboard! {{ username }} </h1>
+            <p class="lead">This is a simple dashboard page.</p>
+            <hr class="my-4">
+            <p>Use this button for logout.</p>
+            <a class="btn btn-primary btn-lg" href=" {% url "logout" %} " role="button">Log Out</a>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %} fixed-bottom {% endblock %}
