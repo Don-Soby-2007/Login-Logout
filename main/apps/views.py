@@ -11,9 +11,14 @@ from django.views.decorators.cache import never_cache
 @never_cache
 def sign_up_page(request):
     if request.method == 'POST':
+
         username = request.POST.get('username')
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
+
+        if not username.isalpha():
+            messages.error(request, "Username must contain only alphabetic characters.")
+            return redirect('signup')
 
         if password != confirm_password:
             messages.error(request, "Passwords do not match.")
