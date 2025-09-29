@@ -38,6 +38,8 @@ def sign_up_page(request):
 
 @never_cache
 def login_page(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -55,8 +57,6 @@ def login_page(request):
 @never_cache
 @login_required(login_url='login')
 def dashboard(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
     return render(request, 'dashboard.html', {"username": request.user.username})
 
 
